@@ -96,7 +96,7 @@ For testing purposes, you can use the following credentials:
 ### Authentication
 - `POST /signup` - Register a new user
 - `POST /login` - User login
-- `POST /api/auth/logout` - User logout
+- `POST /auth/logout` - User logout
 
 ### Notes
 - `GET /notes` - Get all user notes
