@@ -5,13 +5,10 @@ const User = require("./models/user");
 const auth = require("./middleware/auth");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-import limiter from './rateLimiter';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-app.use(limiter);
 
 
 mongoose.connect("mongodb://localhost:27017/notesapp")
@@ -45,7 +42,7 @@ app.put("/notes/:id", auth, async (req, res) => {
   const { title, content } = req.body;
 
   const updatedNote = await Note.findOneAndUpdate(
-    { _id: req.params.id, user: req.user }, // Only allow update if owned by user
+    { _id: req.params.id, user: req.user },
     { title, content },
     { new: true }
   );
@@ -68,7 +65,6 @@ app.delete("/notes/:id", auth, async (req, res) => {
 });
 
 
-// Signup
 app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
 
@@ -85,7 +81,6 @@ app.post("/signup", async (req, res) => {
 });
 
 
-// Login
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
